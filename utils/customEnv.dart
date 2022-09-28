@@ -1,24 +1,18 @@
 import 'dart:io';
 
 class CustomEnv {
-  final Map<String, String> _map = {};
-  static CustomEnv instace = CustomEnv._();
-
-  CustomEnv._() {
-    _init();
-  }
-
-  void _init({String path = '.env'}) {
-    final file = File(path);
-    final envText = file.readAsStringSync();
-
-    for (var line in envText.split('\n')) {
-      final lineBreak = line.split('=');
-      _map[lineBreak[0]] = lineBreak[1];
-    }
-  }
-
-  String? operator [](String key) {
+  static Map<String, String> _map = {};
+  static Future get({required String key}) async {
+    if (_map.isEmpty) await _load();
     return _map[key];
+  }
+
+  static Future<void> _load() async {
+    List<String> linhas = (await _readFile()).split('\n');
+    _map = {for (var l in linhas) l.split('=')[0]: l.split('=')[1]};
+  }
+
+  static Future<String> _readFile({String file = '.env'}) async {
+    return await File(file).readAsString();
   }
 }
