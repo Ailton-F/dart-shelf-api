@@ -3,51 +3,51 @@ import 'dart:convert';
 
 class User {
   final int id;
-  final String name;
+  final String nome;
   final String cpf;
-  final String password;
-  final String matricula;
+  final String email;
+  final String senha;
   User({
     required this.id,
-    required this.name,
+    required this.nome,
     required this.cpf,
-    required this.password,
-    required this.matricula,
+    required this.email,
+    required this.senha,
   });
 
   User copyWith({
     int? id,
-    String? name,
+    String? nome,
     String? cpf,
-    String? password,
-    String? matricula,
+    String? email,
+    String? senha,
   }) {
     return User(
       id: id ?? this.id,
-      name: name ?? this.name,
+      nome: nome ?? this.nome,
       cpf: cpf ?? this.cpf,
-      password: password ?? this.password,
-      matricula: matricula ?? this.matricula,
+      email: email ?? this.email,
+      senha: senha ?? this.senha,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'name': name,
+      'nome': nome,
       'cpf': cpf,
-      'password': password,
-      'matricula': matricula,
+      'email': email,
+      'senha': senha,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id'] as int,
-      name: map['name'] as String,
+      nome: map['nome'] as String,
       cpf: map['cpf'] as String,
-      password: map['password'] as String,
-      matricula: map['matricula'] as String,
+      email: map['email'] as String,
+      senha: map['senha'] as String,
     );
   }
 
@@ -57,7 +57,7 @@ class User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, cpf: $cpf, password: $password, matricula: $matricula)';
+    return 'User(id: $id, nome: $nome, cpf: $cpf, email: $email, senha: $senha)';
   }
 
   @override
@@ -66,18 +66,18 @@ class User {
   
     return 
       other.id == id &&
-      other.name == name &&
+      other.nome == nome &&
       other.cpf == cpf &&
-      other.password == password &&
-      other.matricula == matricula;
+      other.email == email &&
+      other.senha == senha;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
+      nome.hashCode ^
       cpf.hashCode ^
-      password.hashCode ^
-      matricula.hashCode;
+      email.hashCode ^
+      senha.hashCode;
   }
 }

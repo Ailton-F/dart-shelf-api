@@ -9,9 +9,9 @@ import 'services/userServices.dart';
 final _router = Router();
 
 void main(List<String> args) async {
-  final userServices _userServices = userServices();
-  final UserController userController = UserController(_userServices);
-  _router.get('/users', (request) => userController.getAllUsers(request));
+  UserServices userServices = UserServices();
+  final UserController userController = UserController(userServices);
+  _router.get('/', (request) => userController.getAllUsers(request));
   // Use any available host or container IP (usually `0.0.0.0`).
   final ip = InternetAddress.anyIPv4;
 
@@ -20,6 +20,7 @@ void main(List<String> args) async {
 
   // For running in containers, we respect the PORT environment variable.
   final port = int.parse(Platform.environment['PORT'] ?? '8080');
+  print(port);
   final server = await serve(handler, ip, port);
   print('Server listening on port ${server.port}');
 }
